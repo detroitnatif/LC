@@ -3,12 +3,12 @@ class Solution:
 
         intervals.sort(key=lambda x: x[0])
 
-        count = 0
+        c = 0
         
         prevEnd = intervals[0][1]
 
         for start, end in intervals[1:]:
-            if start >= prevEnd:
+            if start > prevEnd:
                 prevEnd = end
             else:
                 count += 1
