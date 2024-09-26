@@ -1,7 +1,7 @@
 class Solution:
     def compress(self, chars: List[str]) -> int:
 
-
+        # BASE CASE
         if len(chars) == 1:
             return 1
 

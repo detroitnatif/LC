@@ -25,6 +25,8 @@ class Solution:
         else:
             return False
         
+
+# SOLVED
 class Solution:
     def increasingTriplet(self, nums: List[int]) -> bool:
 
@@ -44,4 +46,4 @@ class Solution:
         return False
     
 
-# SOLVED
+
