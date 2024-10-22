@@ -17,43 +17,34 @@ hands = {
 # 5. The player with the most points wins the game
 #
 # Output: {"John": 1, "Clara": 2, "Jane": 1, "Bob": 1}
-def f(card, suit):
-    d = {"A": 1, "K": 2, "Q": 3, "J": 4, "10": 5, "9": 6, "8": 7, "7": 8, "6": 9, "5": 10, "4": 11, "3": 12, "2": 13}
-    suits = {"S": 4, "H": 3, "D": 2, "C": 1}
-    return d[card] + suits[suit]
 
+card_values = {'2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9, '10': 10, 'J': 11, 'Q': 12, 'K': 13, 'A': 14}
+suit_values = {'C': 1, 'D': 2, 'H': 3, 'S': 4}  # Clubs < Diamonds < Hearts < Spades
 
-def compute_scores(hands):
-    
-    # for p, h in hands.items():
-        # h.sort(key=f(p, h))
-    
-        # some sort to get all hands in order
-    hands = {
-        "John": ["AD", "QS"],
-        "Clara": ["10H", "6D"],
-        "Jane": ["9C", "7D"],
-        "Bob": ["7S", "2H"],
-    }
-    
-    out = {}
-    for i in hands.keys():
-        out[i] = 0
-        
-    for players in hands.keys():
-        
-        for player in players:
-            
-            print(hands[player][0])
-            
+# Function to get card rank (value + suit)
+def get_card_rank(card):
+    value = card[:-1]  # Extract card value
+    suit = card[-1]    # Extract card suit
+    return (card_values[value], suit_values[suit])
 
-            
-            
-            
-            
-        
-        
-    # TODO
-    pass
+# Initialize points dictionary
+points = defaultdict(int)
 
-print(compute_scores(hands))
+# Each player plays their strongest card (5 rounds)
+for round_num in range(5):
+    # Track the highest card and its owner
+    highest_card = None
+    round_winner = None
+
+    for player, hand in hands.items():
+        # Get the current card
+        card = hand[round_num]
+        card_rank = get_card_rank(card)
+
+        # Determine if this card beats the highest card seen so far
+        if highest_card is None or card_rank > highest_card:
+            highest_card = card_rank
+            round_winner = player
+
+    # Award a point to the winner of this round
+    points[round_winner] += 1
